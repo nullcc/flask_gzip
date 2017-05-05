@@ -7,3 +7,23 @@ Python3.0+ doesn't has StringIO module, use [Flask_Gzip for py2](https://github.
 will cause errors.
 In py3, use gzip.compress() to gzip data.
 
+Usage:
+    
+    import Flask
+    from flask_gzip import Gzip
+    
+    app = Flask(__name__)
+    gzip = Gzip(app)
+    
+or
+
+in exts.py:
+
+    from flask_gzip import Gzip
+    
+    gzip = Gzip()
+    
+in app.py:
+
+    gzip.init_app(app)
+    
