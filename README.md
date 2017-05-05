@@ -1,6 +1,7 @@
 # Flask_Gzip
 
 requirements:
+
 1. python3.0+
 
 Python3.0+ doesn't has StringIO module, use [Flask_Gzip for py2](https://github.com/closeio/Flask-gzip)
@@ -27,3 +28,12 @@ in app.py:
 
     gzip.init_app(app)
     
+    
+parameters:
+
+1. app
+2. compress_level
+
+<br >
+
+    gzip = Gzip(compress_level=9)  # compress_level range 0-9

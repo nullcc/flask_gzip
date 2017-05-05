@@ -3,7 +3,7 @@ from flask import request
 
 
 class Gzip(object):
-    def __init__(self, app=None, compress_level=6):
+    def __init__(self, app=None, compress_level=9):
         self.compress_level = compress_level
         self.app = app
         if app is not None:
