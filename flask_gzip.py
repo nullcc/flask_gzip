@@ -3,10 +3,14 @@ from flask import request
 
 
 class Gzip(object):
-    def __init__(self, app, compress_level=6):
-        self.app = app
+    def __init__(self, app=None, compress_level=6):
         self.compress_level = compress_level
-        self.app.after_request(self.after_request)
+        self.app = app
+        if app is not None:
+            self.init_app(app)
+
+    def init_app(self, app):
+        app.after_request(self.after_request)
 
     def after_request(self, response):
         accept_encoding = request.headers.get('Accept-Encoding', '')
@@ -20,7 +24,7 @@ class Gzip(object):
         if (200 > response.status_code >= 300) or len(response.data) < 500 or 'Content-Encoding' in response.headers:
             return response
 
-        response.data = gzip.compress(response.data)
+        response.data = gzip.compress(response.data, compresslevel=self.compress_level)
         response.headers['Content-Encoding'] = 'gzip'
         response.headers['Content-Length'] = len(response.data)
 
